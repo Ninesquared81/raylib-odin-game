@@ -208,16 +208,19 @@ main :: proc() {
                 v1 := point
                 v2 := r2 + mark
                 v3 := r3 + mark
-                rl.DrawCircleV(v1, point_thickness, point_colours[0])
-                rl.DrawCircleV(v2, point_thickness, point_colours[1])
-                rl.DrawCircleV(v3, point_thickness, point_colours[2])
                 rl.DrawTriangle(v1, v2, v3, shape_colour)
+                rl.DrawCircleV(mark, point_thickness, point_colours[0])
+                rl.DrawCircleV(v1, point_thickness, point_colours[1])
+                rl.DrawCircleV(v2, point_thickness, point_colours[2])
+                rl.DrawCircleV(v3, point_thickness, point_colours[3])
                 debug_add_text(&dbg,
                     "Triangle: v1=(%.0f,%.0f), v2=(%.0f,%.0f), v3=(%.0f,%.0f)",
                     v1[0], v1[1], v2[0], v2[1], v3[0], v3[1])
             }
             }
-            rl.DrawLineV(point, mark, rl.DARKGRAY)
+            if rl.IsMouseButtonDown(.LEFT) {
+                rl.DrawLineV(point, mark, point_colours[0])
+            }
         }
         else {
             debug_add_text(&dbg, "Mark unset")
